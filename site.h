@@ -35,6 +35,7 @@ class site {
     private:
 	INX_ADDR theAddr;
 	std::string thePtr;
+	struct timeval thePtrUpdateTime;
 	double *theRTTs;
 	uint8_t *theTTLs;
 	double theWeightedAvgRTT;

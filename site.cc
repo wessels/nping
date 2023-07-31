@@ -145,7 +145,7 @@ site::sockaddr(socklen_t *len) const
 const char *
 site::ptr()
 {
-	if (thePtr.length())
+	if (thePtr.length() && theCurrentTime.tv_sec - thePtrUpdateTime.tv_sec < 300)
 		return thePtr.c_str();
 	char buf[128];
 	socklen_t salen;
@@ -153,5 +153,6 @@ site::ptr()
 	if (0 != getnameinfo(sa, salen, buf, sizeof(buf), NULL, 0, NI_NAMEREQD))
 		addr().ntop(buf, sizeof(buf));
 	thePtr = buf;
+	thePtrUpdateTime = theCurrentTime;
 	return thePtr.c_str();
 }
