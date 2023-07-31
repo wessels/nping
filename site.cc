@@ -121,7 +121,7 @@ struct sockaddr *
 site::sockaddr(socklen_t *len) const
 {
     static struct sockaddr_storage ss;
-    memset(&ss, sizeof(ss), 0);
+    memset(&ss, 0, sizeof(ss));
     if (4 == theAddr.version()) {
 	struct sockaddr_in *sin = (struct sockaddr_in *) &ss;
 	sin->sin_family = AF_INET;
